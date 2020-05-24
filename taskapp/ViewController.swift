@@ -19,28 +19,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
   // DB内のタスクが格納されるリスト。
   // 日付の近い順でソート：昇順
   // 以降内容をアップデートするとリスト内は自動的に更新される。
-  var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
+    var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
 
-  override func viewDidLoad() {
-      super.viewDidLoad()
-      // Do any additional setup after loading the view.
-      tableView.delegate = self
-      tableView.dataSource = self
-  }
-  
-  // 入力画面から戻ってきた時に TableView を更新させる
-  override func viewWillAppear(_ animated: Bool) {
-      super.viewWillAppear(animated)
-      tableView.reloadData()
-  }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    // 入力画面から戻ってきた時に TableView を更新させる
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
 
-  // データの数（＝セルの数）を返すメソッド
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return taskArray.count  // ←修正する
-  }
+    // データの数（＝セルの数）を返すメソッド
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return taskArray.count  // ←修正する
+    }
 
-  // 各セルの内容を返すメソッド
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    // 各セルの内容を返すメソッド
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       // 再利用可能な cell を得る
       let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
