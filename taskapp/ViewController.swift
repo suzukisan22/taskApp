@@ -9,9 +9,10 @@
 import UIKit
 import RealmSwift
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UITableViewDataSource {
 
   @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var searchInput: UISearchBar!
   
   // Realmインスタンスを取得する
   let realm = try! Realm()
@@ -26,6 +27,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
+        searchInput.delegate = self
     }
     
     // 入力画面から戻ってきた時に TableView を更新させる
@@ -114,4 +116,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
           inputViewController.task = task
       }
     }
+  
+  func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    print(searchBar.text!)
+    return true
+  }
 }
